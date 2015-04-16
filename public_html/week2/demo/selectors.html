@@ -9,22 +9,22 @@
          <form action="#" method="post">            
             <p class="fnameError">
                 <label>First Name</label>
-                <input name="fname" type="text" value="" />
+                <input name="fname" type="text" value="josh" />
                 <span class="hide">*</span>
             </p>
             <p class="lnameError">
                 <label>Last Name</label>
-                <input name="lname" type="text" value="" />
+                <input name="lname" type="text" value="argdfs" />
                 <span class="hide">*</span>
             </p>
             <p class="emailError">
                 <label>Email</label>
-                <input name="email" type="text" value="" />
+                <input name="email" type="text" value="sdfsa" />
                 <span class="hide">*</span>
             </p>
             <p class="phoneError">
                 <label>Phone</label>
-                <input name="phone" type="text" value="" />
+                <input name="phone" type="text" value="hgjgf" />
                 <span class="hide">*</span>
             </p>
             
@@ -53,7 +53,20 @@
                     
              input1.parentNode.classList.add('errors');
              
-             console.log(input1.parentNode.parentNode)
+             console.log(input1.parentNode.parentNode);
+             
+             var data ={};
+             
+             
+             for(var i=0, l=fields.length; i<l; i++){
+                 var input = fields[i].querySelector('input');
+                 data[input.name] = input.value;
+             //console.log( fields[i].querySelector('input').name );
+             
+             }
+             console.log(data);
+             
+             
         </script>
     
     </body>

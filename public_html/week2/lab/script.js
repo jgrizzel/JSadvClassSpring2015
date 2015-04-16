@@ -1,66 +1,52 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 var form = document.querySelector('form');
 
 form.addEventListener('submit', checkForm);
 
 function checkForm(e) {
     e.preventDefault();
-    
-    var fname = document.querySelector('input[name="fname"');
-    var lname = document.querySelector('input[name="lname"');    
-    var email = document.querySelector('input[name="email"]');
-    var phone = document.querySelector('input[name="phone"');
-    
-    var fnameError = document.querySelector('.fnameError').classList;
-    var lnameError = document.querySelector('.lnameError').classList;
-    var emailError = document.querySelector('.emailError').classList;
-    var phoneError = document.querySelector('.phoneError').classList;
-   
+
+    var paragraphs = document.querySelectorAll('form p');
+
+    var data = {};
     var isValid = true;
-    
-     if ( fname.value === '' ) {
-       fnameError.add('error');
-       isValid = false;
-    } else {
-       fnameError.remove('error');
-    }
-     if ( lname.value === '' ) {
-       lnameError.add('error');
-       isValid = false;
-    } else {
-       lnameError.remove('error');
-    }    
-    if ( email.value === '' ) {
-       emailError.add('error');
-       isValid = false;
-    } else {
-       emailError.remove('error');
-    }
-    if ( phone.value === '' ) {
-       phoneError.add('error');
-       isValid = false;
-    } else {
-       phoneError.remove('error');
+    var html = "";
+
+
+    for (var i = 0, l = paragraphs.length; i < l; i++) {
+        var input = paragraphs[i].querySelector('input');
+        var label = paragraphs[i].querySelector('label');
+        data[input.name] = input.value;
+
+
+        if (input.value === '') {
+            paragraphs[i].classList.add('error');
+            isValid = false;
+        } else {
+            paragraphs[i].classList.remove('error');
+        }
+
+        html += '<p>' + label.innerText + ':' + input.value + '</p>';
     }
     
-    
-    if ( isValid === true ) {
+    var passwordError = document.querySelector('.passwordError').classList;
+    var passwordconfError = document.querySelector('.passwordconfError').classList;
+
+    if (data["password"] !== data["passwordconf"])
+    {
+        passwordError.add('error');
+        passwordconfError.add('error');
+        isValid = false;
+    }
+
+    if (isValid === true)
+    {
         form.classList.add('hide');
         var conf = document.querySelector('#confirmation');
-        
-        var html = '<p>First Name: '+ fname.value + '</p>';
-            html += '<p> Last name: ' + lname.value + '</p>';
-            html += '<p> Email: ' + email.value + '</p>';
-            html += '<p> Phone: ' + phone.value + '</p>';
-        
         conf.innerHTML = html;
-        
+
+        console.log(data);
+
     }
-    
+
+
 }
