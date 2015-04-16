@@ -31,7 +31,7 @@
                 var address = document.querySelector('input[type="text"]').value;
                 geocoder.geocode( { 'address': address}, function(results, status) {
                   if (status == google.maps.GeocoderStatus.OK) {
-                      console.log(results);
+                      getAddress(results);
                   } else {
                      console.log('Geocode was not successful for the following reason: ' + status);
                   }
@@ -39,6 +39,27 @@
               }
 
             google.maps.event.addDomListener(window, 'load', initialize);
+            
+            function getAddress(results)
+            {
+                var geoobj = results;
+            
+            var geoaddress = geoobj[0].address_components;
+            var state;
+            var city;
+            
+            for(var i =0, l=geoaddress.length; i<l; i++)
+            {
+                if(geoaddress[i].types.indexOf('administrative_area_level_1') > -1){
+                    state = geoaddress[i].short_name;
+                }
+                if(geoaddress[i].types.indexOf('locality') > -1){
+                    city = geoaddress[i].long_name;
+                }
+            }
+            console.log(state);
+            console.log(city);
+            }
             
             /*
              {
@@ -175,6 +196,26 @@
              
              
              */
+            
+            var geostring ='{"results":[{"address_components":[{"long_name":"02907","short_name":"02907","types":["postal_code"]},{"long_name":"Providence","short_name":"Prov","types":["locality","political"]},{"long_name":"Providence County","short_name":"Providence County","types":["administrative_area_level_2","political"]},{"long_name":"Rhode Island","short_name":"RI","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formatted_address":"Providence, RI 02907, USA","geometry":{"bounds":{"northeast":{"lat":41.8172,"lng":-71.4073101},"southwest":{"lat":41.774681,"lng":-71.44145979999999}},"location":{"lat":41.7956806,"lng":-71.42696789999999},"location_type":"APPROXIMATE","viewport":{"northeast":{"lat":41.8172,"lng":-71.4073101},"southwest":{"lat":41.774681,"lng":-71.44145979999999}}},"place_id":"ChIJdRdK34NP5IkRSwLR4MTE7Vc","postcode_localities":["Cranston","Providence"],"types":["postal_code"]}],"status":"OK"}';
+            var geoobj = JSON.parse(geostring);
+            
+            var geoaddress = geoobj.results[0].address_components;
+            var state;
+            var city;
+            
+            for(var i =0, l=geoaddress.length; i<l; i++)
+            {
+                if(geoaddress[i].types.indexOf('administrative_area_level_1') > -1){
+                    state = geoaddress[i].short_name;
+                }
+                if(geoaddress[i].types.indexOf('locality') > -1){
+                    city = geoaddress[i].long_name;
+                }
+            }
+            console.log(state);
+            console.log(city);
+            
         </script>
     </body>
 </html>
