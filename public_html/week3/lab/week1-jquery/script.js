@@ -5,61 +5,66 @@
  */
 
 
-var form = document.querySelector('form');
 
-form.addEventListener('submit', checkForm);
+//var form = $('form');
 
-function checkForm(e) {
-    e.preventDefault();
+//form.submit( checkForm);
+
+$('form').submit(function( event ) {
+                event.preventDefault();
+                checkForm();
+            });
+
+function checkForm() {
     
-    var fname = document.querySelector('input[name="fname"');
-    var lname = document.querySelector('input[name="lname"');    
-    var email = document.querySelector('input[name="email"]');
-    var phone = document.querySelector('input[name="phone"');
+    var fname = $('input[name="fname"');
+    var lname = $('input[name="lname"');    
+    var email = $('input[name="email"]');
+    var phone = $('input[name="phone"');
     
-    var fnameError = document.querySelector('.fnameError').classList;
-    var lnameError = document.querySelector('.lnameError').classList;
-    var emailError = document.querySelector('.emailError').classList;
-    var phoneError = document.querySelector('.phoneError').classList;
+    var fnameError = $('.fnameError');
+    var lnameError = $('.lnameError');
+    var emailError = $('.emailError');
+    var phoneError = $('.phoneError');
    
     var isValid = true;
     
-     if ( fname.value === '' ) {
-       fnameError.add('error');
+     if ( fname.val() === '' ) {
+       fnameError.addClass('error');
        isValid = false;
     } else {
-       fnameError.remove('error');
+       fnameError.removeClass('error');
     }
-     if ( lname.value === '' ) {
-       lnameError.add('error');
+     if ( lname.val() === '' ) {
+       lnameError.addClass('error');
        isValid = false;
     } else {
-       lnameError.remove('error');
+       lnameError.removeClass('error');
     }    
-    if ( email.value === '' ) {
-       emailError.add('error');
+    if ( email.val() === '' ) {
+       emailError.addClass('error');
        isValid = false;
     } else {
-       emailError.remove('error');
+       emailError.removeClass('error');
     }
-    if ( phone.value === '' ) {
-       phoneError.add('error');
+    if ( phone.val() === '' ) {
+       phoneError.addClass('error');
        isValid = false;
     } else {
-       phoneError.remove('error');
+       phoneError.removeClass('error');
     }
     
     
     if ( isValid === true ) {
-        form.classList.add('hide');
-        var conf = document.querySelector('#confirmation');
+        form.addClass('hide');
+        var conf = $('#confirmation');
         
-        var html = '<p>First Name: '+ fname.value + '</p>';
-            html += '<p> Last name: ' + lname.value + '</p>';
-            html += '<p> Email: ' + email.value + '</p>';
-            html += '<p> Phone: ' + phone.value + '</p>';
+        var html = '<p>First Name: '+ fname.val() + '</p>';
+            html += '<p> Last name: ' + lname.val() + '</p>';
+            html += '<p> Email: ' + email.val() + '</p>';
+            html += '<p> Phone: ' + phone.val() + '</p>';
         
-        conf.innerHTML = html;
+        conf.HTML(html);
         
     }
     
