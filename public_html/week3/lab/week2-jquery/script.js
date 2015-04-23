@@ -1,11 +1,11 @@
-var form = document.querySelector('form');
+var form = $('form');
 
-form.addEventListener('submit', checkForm);
+form.submit(checkForm);
 
 function checkForm(e) {
     e.preventDefault();
 
-    var paragraphs = document.querySelectorAll('form p');
+    var paragraphs = $('form, p');
 
     var data = {};
     var isValid = true;
@@ -13,36 +13,36 @@ function checkForm(e) {
 
 
     for (var i = 0, l = paragraphs.length; i < l; i++) {
-        var input = paragraphs[i].querySelector('input');
-        var label = paragraphs[i].querySelector('label');
-        data[input.name] = input.value;
+        var input = $(paragraphs[i]).children('input');
+        var label = $(paragraphs[i]).children('label');
+        data[input.attr('name')] = input.val();
 
 
-        if (input.value === '') {
-            paragraphs[i].classList.add('error');
+        if (input.val() === '') {
+            $(paragraphs[i]).addClass('error');
             isValid = false;
         } else {
-            paragraphs[i].classList.remove('error');
+            $(paragraphs[i]).removeClass('error');
         }
 
-        html += '<p>' + label.innerText + ':' + input.value + '</p>';
+        html += '<p>' + label.innerText + ':' + input.val() + '</p>';
     }
     
-    var passwordError = document.querySelector('.passwordError').classList;
-    var passwordconfError = document.querySelector('.passwordconfError').classList;
+    var passwordError = $('.passwordError');
+    var passwordconfError = $('.passwordconfError');
 
     if (data["password"] !== data["passwordconf"])
     {
-        passwordError.add('error');
-        passwordconfError.add('error');
+        passwordError.addClass('error');
+        passwordconfError.addClass('error');
         isValid = false;
     }
 
     if (isValid === true)
     {
-        form.classList.add('hide');
-        var conf = document.querySelector('#confirmation');
-        conf.innerHTML = html;
+        form.addClass('hide');
+        var conf = $('#confirmation');
+        conf.HTML = (html);
 
         console.log(data);
 

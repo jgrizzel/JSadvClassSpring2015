@@ -56,7 +56,7 @@ function checkForm() {
     
     
     if ( isValid === true ) {
-        form.addClass('hide');
+        $('form').addClass('hide');
         var conf = $('#confirmation');
         
         var html = '<p>First Name: '+ fname.val() + '</p>';
@@ -64,7 +64,7 @@ function checkForm() {
             html += '<p> Email: ' + email.val() + '</p>';
             html += '<p> Phone: ' + phone.val() + '</p>';
         
-        conf.HTML(html);
+        conf.html(html);
         
     }
     
