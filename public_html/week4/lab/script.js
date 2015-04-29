@@ -2,42 +2,135 @@ var form = document.querySelector('form');
 
 form.addEventListener('submit', checkForm);
 
+var ck_text = /^[A-Za-z0-9 ]{3,20}$/;
+var ck_phone =/^\(?([2-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+var ck_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i 
+var ck_username = /^[A-Za-z0-9_]{1,20}$/;
+var ck_zip = /^[0-9]{5}(?:-[0-9]{4})?$/;
+var ck_password =  /^[A-Za-z0-9!@#$%^&*()_]{6,20}$/;
+
 function checkForm(e) {
     e.preventDefault();
 
     var paragraphs = document.querySelectorAll('form p');
-
     var data = {};
     var isValid = true;
     var html = "";
 
-
-    for (var i = 0, l = paragraphs.length; i < l; i++) {
+    for(var i = 0, l = paragraphs.length; i < l; i++)
+    {
         var input = paragraphs[i].querySelector('input');
         var label = paragraphs[i].querySelector('label');
+        
         data[input.name] = input.value;
-
-
-        if (input.value === '') {
+        
+        if(!ck_text.test(data["fname"]))
+        {
+            isValid =false;
+        }
+        if(!ck_text.test(data["lname"]))
+        {
+            isValid =false;
+        }
+        if(!ck_email.test(data["email"]))
+        {
+            isValid =false;
+        }
+        if(!ck_phone.test(data["phone"]))
+        {
+            isValid =false;
+        }
+        if(!ck_text.test(data["address1"]))
+        {
+            isValid =false;
+        }
+        if(!ck_text.test(data["address2"]))
+        {
+            isValid =false;
+        }
+        if(!ck_text.test(data["city"]))
+        {
+            isValid =false;
+        }
+        if(!ck_text.test(data["state"]))
+        {
+            isValid =false;
+        }
+        if(!ck_zip.test(data["zip"]))
+        {
+            isValid =false;
+        }
+        if(!ck_username.test(data["username"]))
+        {
+            isValid =false;
+        }
+        if(!ck_password.test(data["password"]))
+        {
+            isValid =false;
+        }
+        if(data["password"] !== data["passwordconf"])
+        {
+            passwordError.add('error');
+            passwordconfError.add('error');
+            isValid =false;
+        }
+        }
+    /*if (!ck_text.test(fname))
+        {
+            isValid =false;
+        }
+        if (!ck_text.test(lname))
+        {
+            isValid =false;
+        }
+        if (!ck_email.test(email))
+        {
+            isValid =false;
+        }
+        if (!ck_phone.test(phone))
+        {
+            isValid =false;
+        }
+        if (!ck_text.test(address1))
+        {
+            isValid =false;
+        }
+        if (!ck_text.test(address2))
+        {
+            isValid =false;
+        }
+        if (!ck_text.test(city))
+        {
+            isValid =false;
+        }
+        if (!ck_text.test(state))
+        {
+            isValid =false;
+        }
+        if (!ck_zip.test(zip))
+        {
+            isValid =false;
+        }
+        if (!ck_username.test(username))
+        {
+            isValid =false;
+        }
+        if (!ck_password.test(password))
+        {
+            isValid =false;
+        }
+        if (password !== passwordconf)
+        {
+            isValid =false;
+        }*/
+        
+        if (isValid == false) {
             paragraphs[i].classList.add('error');
-            isValid = false;
+            //isValid = false;
         } else {
             paragraphs[i].classList.remove('error');
         }
-
-        html += '<p>' + label.innerText + ':' + input.value + '</p>';
-    }
-    
-    var passwordError = document.querySelector('.passwordError').classList;
-    var passwordconfError = document.querySelector('.passwordconfError').classList;
-
-    if (data["password"] !== data["passwordconf"])
-    {
-        passwordError.add('error');
-        passwordconfError.add('error');
-        isValid = false;
-    }
-
+        
     if (isValid === true)
     {
         form.classList.add('hide');
@@ -47,9 +140,7 @@ function checkForm(e) {
         console.log(data);
 
     }
-
-
-}
+} 
 
  var geocoder;
 
@@ -95,4 +186,4 @@ function checkForm(e) {
             cityText.value = city;
             //console.log(state);
             //console.log(city);
-            }
+        }
