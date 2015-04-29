@@ -15,12 +15,21 @@
                 'nickname' : 'mr.g'
             };
             
-            localStorage.setItem('data', JSON.stringify(json) );
+            localStorage.setItem('json', JSON.stringify(json) );
             
-            var savedData = localStorage.getItem('data');
+            var savedData = localStorage.getItem('json');
             
-            console.log(savedData);
-            console.log(JSON.parse(savedData));
+           console.log(savedData);
+           console.log(JSON.parse(savedData));
+            
+           
+             document.querySelector('div').innerHTML="";
+            for (var x in json) 
+            {
+                document.querySelector('div').innerHTML += x + " = "+json[x]+"<br/>";
+                
+               
+            }
             
             
             
