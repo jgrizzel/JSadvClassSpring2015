@@ -49,23 +49,55 @@ function checkForm(e) {
         
         html += '<p>' + label.innerText + ':' + input.value + '</p>';
         
-        }
-        /*if(data["password"] !== data["passwordconf"])
+    }
+    
+        var passwordError = document.querySelector('.passwordError').classList;
+        var passwordconfError = document.querySelector('.passwordconfError').classList;
+        
+        if(data["password"] !== data["passwordconf"])
         {
             passwordError.add('error');
             passwordconfError.add('error');
             isValid =false;
-        }*/
+        }
+        
     if (isValid === true)
     {
         form.classList.add('hide');
         var conf = document.querySelector('#confirmation');
+        conf.classList.remove('hide');
         conf.innerHTML = html;
-
+        
         console.log(data);
-
+        
+        localStorage.setItem('json', JSON.stringify(data) );
     }
-} 
+}
+
+function showData() 
+{    
+    var jsonValue = localStorage.getItem('json');
+    if ( jsonValue ) 
+    {
+        form.classList.add('hide');
+        var conf = document.querySelector('#confirmation');
+        conf.classList.remove('hide');
+        var parseJson = JSON.parse(jsonValue);
+        
+        for(var x in parseJson)
+        {
+            conf.innerHTML += x + " = "+parseJson[x]+"<br/>";
+        }        
+    }  
+        document.querySelector('#delete').addEventListener('click', deleteData); // delete will run deleteData() 
+}
+
+window.addEventListener('load', showData);
+
+function deleteData() {
+                localStorage.removeItem("json");
+            }
+
 
  var geocoder;
 
