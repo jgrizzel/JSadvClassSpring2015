@@ -49,13 +49,18 @@ function checkForm(e) {
         
         html += '<p>' + label.innerText + ':' + input.value + '</p>';
         
-        }
-        /*if(data["password"] !== data["passwordconf"])
+    }
+    
+        var passwordError = document.querySelector('.passwordError').classList;
+        var passwordconfError = document.querySelector('.passwordconfError').classList;
+        
+        if(data["password"] !== data["passwordconf"])
         {
             passwordError.add('error');
             passwordconfError.add('error');
             isValid =false;
-        }*/
+        }
+        
     if (isValid === true)
     {
         form.classList.add('hide');
