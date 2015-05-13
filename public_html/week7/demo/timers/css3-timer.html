@@ -43,7 +43,9 @@
             }
             
             function startUpdate() {
-                borderTimer = setInterval(updateBorder, speed);
+                if (!borderTimer){
+                    borderTimer = setInterval(updateBorder, speed);
+            }
             }
             
                         
