@@ -43,6 +43,12 @@
                     ctx.lineTo(can.width, can.height-40);
                     
                     // create a for loop that will create lines across the canvas
+                    for ( var i = 40; i < 200; i += 40 ) {
+				ctx.moveTo(0, i); //x, y
+				ctx.lineTo(can.width, i);
+                            }
+                    
+                    
                     
                     ctx.stroke();
                 }
