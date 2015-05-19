@@ -25,7 +25,7 @@ function checkForm(e) {
             $(paragraphs[i]).removeClass('error');
         }
 
-        html += '<p>' + label.innerText + ':' + input.val() + '</p>';
+        html += '<p>' + label.text() + ': ' + input.val() + '</p>';
     }
     
     var passwordError = $('.passwordError');
@@ -42,7 +42,7 @@ function checkForm(e) {
     {
         form.addClass('hide');
         var conf = $('#confirmation');
-        conf.HTML = (html);
+        conf.html(html);
 
         console.log(data);
 
