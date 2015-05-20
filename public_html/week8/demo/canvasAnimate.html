@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+         <style type="text/css">
+            canvas {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="tutorial" width="750" height="550"></canvas>
+
+        <script type="text/javascript">            
+            
+            var can = document.querySelector('#tutorial');
+            var ctx = can.getContext('2d');
+
+
+            function drawClear(){
+                ctx.clearRect(0,0,can.width,can.height);
+            }
+
+            var h = 20,
+                y = 400,
+                x = 150;
+        
+        
+            function growRect(){
+                 
+                if ( h < 300) {
+                    drawClear();
+                    h += 20;
+                    ctx.fillRect(x, y-h, 50, h);
+                    setTimeout(growRect, 100);
+                } else {
+                    moveRect();
+                }
+            }
+            
+            window.addEventListener('load', growRect);
+            
+           
+            function moveRect(){
+                
+                x += 50;
+                ctx.fillRect(x, y-h, 50, h); // x, y, width, height
+            }
+           
+            
+        </script>
+    </body>
+</html>
