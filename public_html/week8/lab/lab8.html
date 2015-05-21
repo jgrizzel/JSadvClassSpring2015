@@ -18,9 +18,147 @@
         
         <script type="text/javascript">
             
-           function randNum(max) {
+            var can = document.querySelector('#race');
+            var ctx = can.getContext('2d');
+            
+            var canvasRight = (can.width - 85);
+            var play = document.querySelector('#play');
+            
+            var redWidth = 35,
+                redHeight = 20,
+                redX = 10,
+                redY = 25;
+        
+            var blueWidth = 35,
+                blueHeight = 20,
+                blueX = 10,
+                blueY = 75;
+        
+            var blueWin = false,
+                redWin = false;
+        
+            
+            function drawClear(){
+                ctx.clearRect(0,0,can.width,can.height);
+            }
+            function randNum(max) {
                return Math.ceil(Math.random()*max) + 1;
            }
+           
+           function red (){
+               ctx.fillStyle = "red";
+               ctx.fillRect(redX, redY, redWidth, redHeight); // x y / w h
+           }
+           function blue (){
+               ctx.fillStyle = "blue";
+               ctx.fillRect(blueX, blueY, blueWidth, blueHeight); // x y / w h
+           }
+           
+           function set(){
+               red();
+               blue();
+               drawLines();
+           }
+           
+           window.addEventListener('load', set);
+           
+           function redMove (){
+               if ( redX < canvasRight ) {
+                    ctx.fillStyle = "red";
+                    redX += randNum(30);                    
+                    ctx.fillRect(redX, redY, redWidth, redHeight); // x y / w h
+                    if(redX >= canvasRight){
+                    redWin = true;
+                    }
+                    
+                }
+           }
+           
+           function blueMove (){
+               if ( blueX < canvasRight ) {
+                    ctx.fillStyle = "blue";
+                    blueX += randNum(30);                    
+                    ctx.fillRect(blueX, blueY, blueWidth, blueHeight); // x y / w h
+                    if(blueX >= canvasRight){
+                    blueWin = true;
+                }
+                }
+           }
+           
+           function drawLines() {		
+		ctx.strokeStyle = "green";			
+		ctx.lineWidth = 3;			
+		ctx.beginPath();
+		ctx.moveTo(700, 0);
+		ctx.lineTo(700, 150);			
+		ctx.stroke();		
+		}
+                
+                function redWins(){
+                    ctx.fillStyle = "red";
+			ctx.font = "20pt Helvetica";
+			ctx.fillText("RED IS THE WINNER!", (can.width/2)-100, 30);
+                }
+                
+                 function blueWins(){
+                    ctx.fillStyle = "blue";
+			ctx.font = "20pt Helvetica";
+			ctx.fillText("BLUE IS THE WINNER!", (can.width/2)-100, 30);
+                }
+                
+                 function draw(){
+                    ctx.fillStyle = "yellow";
+			ctx.font = "20pt Helvetica";
+			ctx.fillText("NO WINNER! :(", (can.width/2)-100, 30);
+                }
+           
+           function race (){
+               document.getElementById('play').style.visibility = 'hidden';
+               
+               drawClear();
+               drawLines();
+               
+               if(blueWin == false && redWin == false){
+               blueMove();
+               redMove();
+               setTimeout(race, 100); 
+               }
+               if(blueWin == true && redWin == true){
+                   draw();
+                   document.getElementById('play').style.visibility = 'visible';
+                   
+               }
+               else if(blueWin == true){
+                   blueWins();
+                   document.getElementById('play').style.visibility = 'visible';
+               }
+               else if(redWin == true){
+                   redWins();
+                   document.getElementById('play').style.visibility = 'visible';
+               }
+               
+               
+               
+           }
+           
+           function reset (){
+                redWidth = 35;
+                redHeight = 20;
+                redX = 10;
+                redY = 25;
+                blueWidth = 35;
+                blueHeight = 20;
+                blueX = 10;
+                blueY = 75;
+                blueWin = false;
+                redWin = false;
+               race();
+               
+           }
+           
+           play.addEventListener('click', reset);
+           
+           
         </script>
     </body>
 </html>
