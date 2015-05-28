@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content
+        </div>
+        <button id="pop">Pop</button>
+        
+        <script type="text/javascript">
+            //create a json object
+            /* not how to do it
+             */
+            /*
+            var json = {};
+            //create array
+            var arr = [];
+            //added fname and lname to json object
+            json.fname ='josh';
+            json.lname ='grizzel';           
+            
+            // start with the array.. adds to an array using push function            
+            arr.push(json);
+            
+             //added fname and lname to json object
+            json.fname ='john';
+            json.lname ='smith';           
+            
+            // start with the array.. adds to an array using push function            
+            arr.push(json);
+            
+            console.log(arr);
+            /*****************************************/
+            
+            
+            
+            var arr2 =[];
+            arr2.push({
+                "fname":'test',
+                "lname": 'tester'
+                
+            });
+            
+            arr2.push({
+                "fname":'jim',
+                "lname": 'bean'
+                
+            });
+            //how to access a specific varible in a json object/array
+            console.log(arr2[1].lname);
+            
+           function addArr (fname, lname) {
+         var jsonD = {};
+         jsonD.fname = fname;
+         jsonD.lname = lname;
+        arr2.push(jsonD);
+              
+           }
+
+
+                addArr('ken', 'joe');
+                addArr('tom', 'joe');
+                addArr('john', 'joe');
+
+                console.log(arr2);
+
+
+//create a button that will remove the last item in the array
+     function popp(){
+         arr2.pop();
+         console.log(arr2);
+     }          
+    
+                
+               var pop = document.querySelector('#pop');
+
+                pop.addEventListener('click', popp);
+                
+                
+           
+           
+           
+            
+            
+        </script>
+    </body>
+</html>

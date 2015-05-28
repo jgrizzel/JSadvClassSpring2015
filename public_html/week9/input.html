@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        First Name <input type="text" name="fname"/>
+        <span id="fnameErr"></span><br>
+        Last Name <input type="text" name="lname"/>
+        <span id="lnameErr"></span>
+
+        <input type="button" id="sub" value="submit"/>
+
+        <script type="text/javascript">
+
+            var submit = document.querySelector('#sub');
+            var arr2 = [];
+            var first = document.querySelector('input[name="fname"');
+            var last = document.querySelector('input[name="lname"');
+            var fnameErr = document.querySelector('#fnameErr');
+            var lnameErr = document.querySelector('#lnameErr');
+
+            var isValid = true;
+
+            function addPerson() {
+
+                if (first.value === '') {
+                    fnameErr.innerHTML = "Fill in first name";
+                    isValid = false;
+                } else {
+                    fnameErr.innerHTML = "";
+                    isValid = true;
+                }
+                if (last.value === '') {
+                    lnameErr.innerHTML = "Fill in first name";
+                    isValid = false;
+                } else {
+                    lnameErr.innerHTML = "";
+                    isValid = true;
+                }
+
+
+                if (isValid === true) {
+                    arr2.push({
+                        "fname": first.value,
+                        "lname": last.value
+                    });
+                    
+                    first.value = "";
+                    last.value = "";
+                }
+
+
+                console.log(arr2);
+            }
+
+            submit.addEventListener('click', addPerson);
+
+
+        </script>
+    </body>
+</html>
