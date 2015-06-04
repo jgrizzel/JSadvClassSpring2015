@@ -27,6 +27,8 @@ function showData()
 {
     var jsonValue = localStorage.getItem('json');
 }
+// array for local storage
+    var arr2 = [];
 
 function checkForm(e) {
     e.preventDefault();
@@ -44,8 +46,7 @@ function checkForm(e) {
 
 //variable isValid to be used in error checking
     var isValid = true;
-    // array for local storage
-    var arr2 = [];
+    
 
 //regex testing for the fullname value inputed by user.
     if (!regexName.test(fullname.value)) {
@@ -94,7 +95,8 @@ function checkForm(e) {
 // adds the json data object to the array
         arr2.push(testData);
 // stores the jason object to the local storage
-        localStorage.setItem('final', JSON.stringify(testData));
+        localStorage.removeItem('final');
+        localStorage.setItem('final', JSON.stringify(arr2));
 
 // clear all the fields to allow the user to enter the next data set
         fullname.value = "";
